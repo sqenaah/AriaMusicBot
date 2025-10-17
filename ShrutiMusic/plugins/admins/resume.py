@@ -1,25 +1,5 @@
 utf-8utf-8
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 frompyrogramimportfilters
 frompyrogram.typesimportMessage
 
@@ -41,15 +21,3 @@ awaitNand.resume_stream(chat_id)
 awaitmessage.reply_text(
 _["admin_4"].format(message.from_user.mention),reply_markup=close_markup(_)
 )
-
-
-
-
-
-
-
-
-
-
-
-
