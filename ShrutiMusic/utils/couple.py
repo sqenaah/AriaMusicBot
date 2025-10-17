@@ -1,6 +1,3 @@
-utf-8utf-8coupledb={}
-
-
 asyncdef_get_lovers(cid:int):
     chat_data=coupledb.get(cid,{})
 lovers=chat_data.get("couple",{})
@@ -23,6 +20,3 @@ asyncdefsave_couple(cid:int,date:str,couple:dict,img:str):
         coupledb[cid]={"couple":{},"img":""}
 coupledb[cid]["couple"][date]=couple
 coupledb[cid]["img"]=img
-
-
-
