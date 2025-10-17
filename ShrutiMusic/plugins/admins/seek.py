@@ -1,109 +1,109 @@
-# Copyright (c) 2025 Nand Yaduwanshi <NoxxOP>
-# Location: Supaul, Bihar
-#
-# All rights reserved.
-#
-# This code is the intellectual property of Nand Yaduwanshi.
-# You are not allowed to copy, modify, redistribute, or use this
-# code for commercial or personal projects without explicit permission.
-#
-# Allowed:
-# - Forking for personal learning
-# - Submitting improvements via pull requests
-#
-# Not Allowed:
-# - Claiming this code as your own
-# - Re-uploading without credit or permission
-# - Selling or using commercially
-#
-# Contact for permissions:
-# Email: badboy809075@gmail.com
+utf-8utf-8
 
 
-from pyrogram import filters
-from pyrogram.types import Message
 
-from ShrutiMusic import YouTube, app
-from ShrutiMusic.core.call import Nand
-from ShrutiMusic.misc import db
-from ShrutiMusic.utils import AdminRightsCheck, seconds_to_min
-from ShrutiMusic.utils.inline import close_markup
-from config import BANNED_USERS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+frompyrogramimportfilters
+frompyrogram.typesimportMessage
+
+fromShrutiMusicimportYouTube,app
+fromShrutiMusic.core.callimportNand
+fromShrutiMusic.miscimportdb
+fromShrutiMusic.utilsimportAdminRightsCheck,seconds_to_min
+fromShrutiMusic.utils.inlineimportclose_markup
+fromconfigimportBANNED_USERS
 
 
 @app.on_message(
-    filters.command(["seek", "cseek", "seekback", "cseekback"])
-    & filters.group
-    & ~BANNED_USERS
+filters.command(["seek","cseek","seekback","cseekback"])
+&filters.group
+&~BANNED_USERS
 )
 @AdminRightsCheck
-async def seek_comm(cli, message: Message, _, chat_id):
-    if len(message.command) == 1:
-        return await message.reply_text(_["admin_20"])
-    query = message.text.split(None, 1)[1].strip()
-    if not query.isnumeric():
-        return await message.reply_text(_["admin_21"])
-    playing = db.get(chat_id)
-    if not playing:
-        return await message.reply_text(_["queue_2"])
-    duration_seconds = int(playing[0]["seconds"])
-    if duration_seconds == 0:
-        return await message.reply_text(_["admin_22"])
-    file_path = playing[0]["file"]
-    duration_played = int(playing[0]["played"])
-    duration_to_skip = int(query)
-    duration = playing[0]["dur"]
-    if message.command[0][-2] == "c":
-        if (duration_played - duration_to_skip) <= 10:
-            return await message.reply_text(
-                text=_["admin_23"].format(seconds_to_min(duration_played), duration),
-                reply_markup=close_markup(_),
-            )
-        to_seek = duration_played - duration_to_skip + 1
-    else:
-        if (duration_seconds - (duration_played + duration_to_skip)) <= 10:
-            return await message.reply_text(
-                text=_["admin_23"].format(seconds_to_min(duration_played), duration),
-                reply_markup=close_markup(_),
-            )
-        to_seek = duration_played + duration_to_skip + 1
-    mystic = await message.reply_text(_["admin_24"])
-    if "vid_" in file_path:
-        n, file_path = await YouTube.video(playing[0]["vidid"], True)
-        if n == 0:
-            return await message.reply_text(_["admin_22"])
-    check = (playing[0]).get("speed_path")
-    if check:
-        file_path = check
-    if "index_" in file_path:
-        file_path = playing[0]["vidid"]
-    try:
-        await Nand.seek_stream(
-            chat_id,
-            file_path,
-            seconds_to_min(to_seek),
-            duration,
-            playing[0]["streamtype"],
-        )
-    except:
-        return await mystic.edit_text(_["admin_26"], reply_markup=close_markup(_))
-    if message.command[0][-2] == "c":
-        db[chat_id][0]["played"] -= duration_to_skip
-    else:
-        db[chat_id][0]["played"] += duration_to_skip
-    await mystic.edit_text(
-        text=_["admin_25"].format(seconds_to_min(to_seek), message.from_user.mention),
-        reply_markup=close_markup(_),
-    )
+asyncdefseek_comm(cli,message:Message,_,chat_id):
+    iflen(message.command)==1:
+        returnawaitmessage.reply_text(_["admin_20"])
+query=message.text.split(None,1)[1].strip()
+ifnotquery.isnumeric():
+        returnawaitmessage.reply_text(_["admin_21"])
+playing=db.get(chat_id)
+ifnotplaying:
+        returnawaitmessage.reply_text(_["queue_2"])
+duration_seconds=int(playing[0]["seconds"])
+ifduration_seconds==0:
+        returnawaitmessage.reply_text(_["admin_22"])
+file_path=playing[0]["file"]
+duration_played=int(playing[0]["played"])
+duration_to_skip=int(query)
+duration=playing[0]["dur"]
+ifmessage.command[0][-2]=="c":
+        if(duration_played-duration_to_skip)<=10:
+            returnawaitmessage.reply_text(
+text=_["admin_23"].format(seconds_to_min(duration_played),duration),
+reply_markup=close_markup(_),
+)
+to_seek=duration_played-duration_to_skip+1
+else:
+        if(duration_seconds-(duration_played+duration_to_skip))<=10:
+            returnawaitmessage.reply_text(
+text=_["admin_23"].format(seconds_to_min(duration_played),duration),
+reply_markup=close_markup(_),
+)
+to_seek=duration_played+duration_to_skip+1
+mystic=awaitmessage.reply_text(_["admin_24"])
+if"vid_"infile_path:
+        n,file_path=awaitYouTube.video(playing[0]["vidid"],True)
+ifn==0:
+            returnawaitmessage.reply_text(_["admin_22"])
+check=(playing[0]).get("speed_path")
+ifcheck:
+        file_path=check
+if"index_"infile_path:
+        file_path=playing[0]["vidid"]
+try:
+        awaitNand.seek_stream(
+chat_id,
+file_path,
+seconds_to_min(to_seek),
+duration,
+playing[0]["streamtype"],
+)
+except:
+        returnawaitmystic.edit_text(_["admin_26"],reply_markup=close_markup(_))
+ifmessage.command[0][-2]=="c":
+        db[chat_id][0]["played"]-=duration_to_skip
+else:
+        db[chat_id][0]["played"]+=duration_to_skip
+awaitmystic.edit_text(
+text=_["admin_25"].format(seconds_to_min(to_seek),message.from_user.mention),
+reply_markup=close_markup(_),
+)
 
 
-# ©️ Copyright Reserved - @NoxxOP  Nand Yaduwanshi
-
-# ===========================================
-# ©️ 2025 Nand Yaduwanshi (aka @NoxxOP)
-# 🔗 GitHub : https://github.com/NoxxOP/ShrutiMusic
-# 📢 Telegram Channel : https://t.me/ShrutiBots
-# ===========================================
 
 
-# ❤️ Love From ShrutiBots 
+
+
+
+
+
+
+
+

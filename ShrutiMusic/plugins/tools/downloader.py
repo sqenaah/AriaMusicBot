@@ -1,85 +1,84 @@
-# Copyright (c) 2025 Nand Yaduwanshi <NoxxOP>
-# Location: Supaul, Bihar
-#
-# All rights reserved.
-#
-# This code is the intellectual property of Nand Yaduwanshi.
-# You are not allowed to copy, modify, redistribute, or use this
-# code for commercial or personal projects without explicit permission.
-#
-# Allowed:
-# - Forking for personal learning
-# - Submitting improvements via pull requests
-#
-# Not Allowed:
-# - Claiming this code as your own
-# - Re-uploading without credit or permission
-# - Selling or using commercially
-#
-# Contact for permissions:
-# Email: badboy809075@gmail.com
+utf-8utf-8
 
 
-from pyrogram import filters
-from pyrogram.types import Message
-from ShrutiMusic import app
-import requests
-import os
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+frompyrogramimportfilters
+frompyrogram.typesimportMessage
+fromShrutiMusicimportapp
+importrequests
+importos
 
 @app.on_message(filters.command("vid"))
-async def video_downloader(_, message: Message):
-    if len(message.command) < 2:
-        return await message.reply_text("❌ Please provide a video URL.\n\nExample:\n/vid Any_video_url")
+asyncdefvideo_downloader(_,message:Message):
+    iflen(message.command)<2:
+        returnawaitmessage.reply_text("❌ Please provide a video URL.\n\nExample:\n/vid Any_video_url")
 
-    video_url = message.text.split(None, 1)[1]
+video_url=message.text.split(None,1)[1]
 
-    msg = await message.reply("🔍 Fetching video...")
+msg=awaitmessage.reply("🔍 Fetching video...")
 
-    # Step 1: Call API
-    payload = {
-        "url": video_url,
-        "token": "c99f113fab0762d216b4545e5c3d615eefb30f0975fe107caab629d17e51b52d"
-    }
 
-    headers = {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "User-Agent": "Mozilla/5.0 (Linux; Android 14)",
-    }
+payload={
+"url":video_url,
+"token":"c99f113fab0762d216b4545e5c3d615eefb30f0975fe107caab629d17e51b52d"
+}
 
-    try:
-        r = requests.post("https://allvideodownloader.cc/wp-json/aio-dl/video-data/", data=payload, headers=headers)
-        data = r.json()
+headers={
+"Content-Type":"application/x-www-form-urlencoded",
+"User-Agent":"Mozilla/5.0 (Linux; Android 14)",
+}
 
-        if "medias" not in data or not data["medias"]:
-            return await msg.edit("❌ No downloadable video found.")
+try:
+        r=requests.post("https://allvideodownloader.cc/wp-json/aio-dl/video-data/",data=payload,headers=headers)
+data=r.json()
 
-        # Step 2: Get best quality video URL
-        best_video = sorted(data["medias"], key=lambda x: x.get("quality", ""), reverse=True)[0]
-        video_link = best_video["url"]
+if"medias"notindataornotdata["medias"]:
+            returnawaitmsg.edit("❌ No downloadable video found.")
 
-        # Step 3: Download the video to temp file
-        await msg.edit("⬇️ Downloading video...")
 
-        file_name = "video.mp4"
-        with requests.get(video_link, stream=True) as v:
-            with open(file_name, "wb") as f:
-                for chunk in v.iter_content(chunk_size=8192):
+best_video=sorted(data["medias"],key=lambdax:x.get("quality",""),reverse=True)[0]
+video_link=best_video["url"]
+
+
+awaitmsg.edit("⬇️ Downloading video...")
+
+file_name="video.mp4"
+withrequests.get(video_link,stream=True)asv:
+            withopen(file_name,"wb")asf:
+                forchunkinv.iter_content(chunk_size=8192):
                     f.write(chunk)
 
-        # Step 4: Send video to user
-        await app.send_video(
-            chat_id=message.chat.id,
-            video=file_name,
-            caption=f"🎬 {data.get('title', 'Video')}\n\n✅ ",
-            supports_streaming=True
-        )
 
-        await msg.delete()
-        os.remove(file_name)
+awaitapp.send_video(
+chat_id=message.chat.id,
+video=file_name,
+caption=f"🎬 {data.get('title', 'Video')}\n\n✅ ",
+supports_streaming=True
+)
 
-    except Exception as e:
-        await msg.edit(f"❌ Error: {str(e)}")
+awaitmsg.delete()
+os.remove(file_name)
 
+exceptExceptionase:
+        awaitmsg.edit(f"❌ Error: {str(e)}")
 
 
 
@@ -3312,33 +3311,33 @@ async def video_downloader(_, message: Message):
 
 
 
-from pyrogram import filters
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, InputMediaVideo
-from ShrutiMusic import app
 
-REPO_VIDEO = "https://files.catbox.moe/aoafwn.mp4"
+frompyrogramimportfilters
+frompyrogram.typesimportMessage,InlineKeyboardMarkup,InlineKeyboardButton,InputMediaVideo
+fromShrutiMusicimportapp
 
-@app.on_message(filters.command(["repo", "source"]))
-async def send_repo(_, message: Message):
-    await message.reply_video(
-        video=REPO_VIDEO,
-        caption=(
-            "<b>✨ ʜᴇʏ ᴅᴇᴀʀ, ʜᴇʀᴇ ɪꜱ ᴛʜᴇ ᴏꜰꜰɪᴄɪᴀʟ ʀᴇᴘᴏꜱɪᴛᴏʀʏ �ᴏꜰ ᴛʜɪꜱ ʙᴏᴛ ✨</b>\n\n"
-            "🔗 �ᴏɴ'ᴛ ꜰᴏʀɢᴇᴛ ᴛᴏ ɢɪᴠᴇ ᴀ ꜱᴛᴀʀ 🌟 ᴀɴᴅ ꜰᴏʟʟᴏᴡ!\n\n"
-            "🧡 ᴄʀᴇᴅɪᴛꜱ : <a href='https://t.me/ShrutiBots'>@ShrutiBots</a>"
-        ),
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton("📂 Management Bot", url="http://github.com/NoxxOP/ShrutiMusic"),
-                    InlineKeyboardButton("📂 Music Bot", url="http://github.com/NoxxOP/ShrutixMusic")
-                ]
-            ]
-        ),
-        supports_streaming=True,
-        has_spoiler=True,
-    )
+REPO_VIDEO="https://files.catbox.moe/aoafwn.mp4"
 
+@app.on_message(filters.command(["repo","source"]))
+asyncdefsend_repo(_,message:Message):
+    awaitmessage.reply_video(
+video=REPO_VIDEO,
+caption=(
+"<b>✨ ʜᴇʏ ᴅᴇᴀʀ, ʜᴇʀᴇ ɪꜱ ᴛʜᴇ ᴏꜰꜰɪᴄɪᴀʟ ʀᴇᴘᴏꜱɪᴛᴏʀʏ �ᴏꜰ ᴛʜɪꜱ ʙᴏᴛ ✨</b>\n\n"
+"🔗 �ᴏɴ'ᴛ ꜰᴏʀɢᴇᴛ ᴛᴏ ɢɪᴠᴇ ᴀ ꜱᴛᴀʀ 🌟 ᴀɴᴅ ꜰᴏʟʟᴏᴡ!\n\n"
+"🧡 ᴄʀᴇᴅɪᴛꜱ : <a href='https://t.me/ShrutiBots'>@ShrutiBots</a>"
+),
+reply_markup=InlineKeyboardMarkup(
+[
+[
+InlineKeyboardButton("📂 Management Bot",url="http://github.com/NoxxOP/ShrutiMusic"),
+InlineKeyboardButton("📂 Music Bot",url="http://github.com/NoxxOP/ShrutixMusic")
+]
+]
+),
+supports_streaming=True,
+has_spoiler=True,
+)
 
 
 
@@ -3664,13 +3663,14 @@ async def send_repo(_, message: Message):
 
 
 
-# ©️ Copyright Reserved - @NoxxOP  Nand Yaduwanshi
 
-# ===========================================
-# ©️ 2025 Nand Yaduwanshi (aka @NoxxOP)
-# 🔗 GitHub : https://github.com/NoxxOP/ShrutiMusic
-# 📢 Telegram Channel : https://t.me/ShrutiBots
-# ===========================================
 
 
-# ❤️ Love From ShrutiBots 
+
+
+
+
+
+
+
+

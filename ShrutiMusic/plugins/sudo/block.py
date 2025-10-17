@@ -1,93 +1,93 @@
-# Copyright (c) 2025 Nand Yaduwanshi <NoxxOP>
-# Location: Supaul, Bihar
-#
-# All rights reserved.
-#
-# This code is the intellectual property of Nand Yaduwanshi.
-# You are not allowed to copy, modify, redistribute, or use this
-# code for commercial or personal projects without explicit permission.
-#
-# Allowed:
-# - Forking for personal learning
-# - Submitting improvements via pull requests
-#
-# Not Allowed:
-# - Claiming this code as your own
-# - Re-uploading without credit or permission
-# - Selling or using commercially
-#
-# Contact for permissions:
-# Email: badboy809075@gmail.com
+utf-8utf-8
 
 
-from pyrogram import filters
-from pyrogram.types import Message
-
-from ShrutiMusic import app
-from ShrutiMusic.misc import SUDOERS
-from ShrutiMusic.utils.database import add_gban_user, remove_gban_user
-from ShrutiMusic.utils.decorators.language import language
-from ShrutiMusic.utils.extraction import extract_user
-from config import BANNED_USERS
 
 
-@app.on_message(filters.command(["block"]) & SUDOERS)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+frompyrogramimportfilters
+frompyrogram.typesimportMessage
+
+fromShrutiMusicimportapp
+fromShrutiMusic.miscimportSUDOERS
+fromShrutiMusic.utils.databaseimportadd_gban_user,remove_gban_user
+fromShrutiMusic.utils.decorators.languageimportlanguage
+fromShrutiMusic.utils.extractionimportextract_user
+fromconfigimportBANNED_USERS
+
+
+@app.on_message(filters.command(["block"])&SUDOERS)
 @language
-async def useradd(client, message: Message, _):
-    if not message.reply_to_message:
-        if len(message.command) != 2:
-            return await message.reply_text(_["general_1"])
-    user = await extract_user(message)
-    if user.id in BANNED_USERS:
-        return await message.reply_text(_["block_1"].format(user.mention))
-    await add_gban_user(user.id)
-    BANNED_USERS.add(user.id)
-    await message.reply_text(_["block_2"].format(user.mention))
+asyncdefuseradd(client,message:Message,_):
+    ifnotmessage.reply_to_message:
+        iflen(message.command)!=2:
+            returnawaitmessage.reply_text(_["general_1"])
+user=awaitextract_user(message)
+ifuser.idinBANNED_USERS:
+        returnawaitmessage.reply_text(_["block_1"].format(user.mention))
+awaitadd_gban_user(user.id)
+BANNED_USERS.add(user.id)
+awaitmessage.reply_text(_["block_2"].format(user.mention))
 
 
-@app.on_message(filters.command(["unblock"]) & SUDOERS)
+@app.on_message(filters.command(["unblock"])&SUDOERS)
 @language
-async def userdel(client, message: Message, _):
-    if not message.reply_to_message:
-        if len(message.command) != 2:
-            return await message.reply_text(_["general_1"])
-    user = await extract_user(message)
-    if user.id not in BANNED_USERS:
-        return await message.reply_text(_["block_3"].format(user.mention))
-    await remove_gban_user(user.id)
-    BANNED_USERS.remove(user.id)
-    await message.reply_text(_["block_4"].format(user.mention))
+asyncdefuserdel(client,message:Message,_):
+    ifnotmessage.reply_to_message:
+        iflen(message.command)!=2:
+            returnawaitmessage.reply_text(_["general_1"])
+user=awaitextract_user(message)
+ifuser.idnotinBANNED_USERS:
+        returnawaitmessage.reply_text(_["block_3"].format(user.mention))
+awaitremove_gban_user(user.id)
+BANNED_USERS.remove(user.id)
+awaitmessage.reply_text(_["block_4"].format(user.mention))
 
 
-@app.on_message(filters.command(["blocked", "blockedusers", "blusers"]) & SUDOERS)
+@app.on_message(filters.command(["blocked","blockedusers","blusers"])&SUDOERS)
 @language
-async def sudoers_list(client, message: Message, _):
-    if not BANNED_USERS:
-        return await message.reply_text(_["block_5"])
-    mystic = await message.reply_text(_["block_6"])
-    msg = _["block_7"]
-    count = 0
-    for users in BANNED_USERS:
+asyncdefsudoers_list(client,message:Message,_):
+    ifnotBANNED_USERS:
+        returnawaitmessage.reply_text(_["block_5"])
+mystic=awaitmessage.reply_text(_["block_6"])
+msg=_["block_7"]
+count=0
+forusersinBANNED_USERS:
         try:
-            user = await app.get_users(users)
-            user = user.first_name if not user.mention else user.mention
-            count += 1
-        except:
+            user=awaitapp.get_users(users)
+user=user.first_nameifnotuser.mentionelseuser.mention
+count+=1
+except:
             continue
-        msg += f"{count}➤ {user}\n"
-    if count == 0:
-        return await mystic.edit_text(_["block_5"])
-    else:
-        return await mystic.edit_text(msg)
+msg+=f"{count}➤ {user}\n"
+ifcount==0:
+        returnawaitmystic.edit_text(_["block_5"])
+else:
+        returnawaitmystic.edit_text(msg)
 
 
-# ©️ Copyright Reserved - @NoxxOP  Nand Yaduwanshi
-
-# ===========================================
-# ©️ 2025 Nand Yaduwanshi (aka @NoxxOP)
-# 🔗 GitHub : https://github.com/NoxxOP/ShrutiMusic
-# 📢 Telegram Channel : https://t.me/ShrutiBots
-# ===========================================
 
 
-# ❤️ Love From ShrutiBots 
+
+
+
+
+
+
+
+

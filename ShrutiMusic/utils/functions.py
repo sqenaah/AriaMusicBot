@@ -1,34 +1,34 @@
-# Copyright (c) 2025 Nand Yaduwanshi <NoxxOP>
-# Location: Supaul, Bihar
-#
-# All rights reserved.
-#
-# This code is the intellectual property of Nand Yaduwanshi.
-# You are not allowed to copy, modify, redistribute, or use this
-# code for commercial or personal projects without explicit permission.
-#
-# Allowed:
-# - Forking for personal learning
-# - Submitting improvements via pull requests
-#
-# Not Allowed:
-# - Claiming this code as your own
-# - Re-uploading without credit or permission
-# - Selling or using commercially
-#
-# Contact for permissions:
-# Email: badboy809075@gmail.com
+utf-8utf-8
 
 
-from datetime import datetime, timedelta
-from re import findall
-from re import sub as re_sub
 
-from pyrogram import errors
-from pyrogram.enums import MessageEntityType
-from pyrogram.types import Message
 
-MARKDOWN = """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+fromdatetimeimportdatetime,timedelta
+fromreimportfindall
+fromreimportsubasre_sub
+
+frompyrogramimporterrors
+frompyrogram.enumsimportMessageEntityType
+frompyrogram.typesimportMessage
+
+MARKDOWN="""
 ʀᴇᴀᴅ ᴛʜᴇ ʙᴇʟᴏᴡ ᴛᴇxᴛ ᴄᴀʀᴇғᴜʟʟʏ ᴛᴏ ғɪɴᴅ ᴏᴜᴛ ʜᴏᴡ ғᴏʀᴍᴀᴛᴛɪɴɢ ᴡᴏʀᴋs!
 
 <u>sᴜᴘᴘᴏʀᴛᴇᴅ ғɪʟʟɪɴɢs:</u>
@@ -69,7 +69,7 @@ MARKDOWN = """
 <b>example</b>  
 <blockquote><i>button with markdown</i> <code>formatting</code> ~ [button text, https://google.com]</blockquote>
 """
-WELCOMEHELP = """
+WELCOMEHELP="""
 /setwelcome - ʀᴇᴘʟʏ ᴛʜɪs ᴛᴏ ᴀ ᴍᴇssᴀɢᴇ ᴄᴏɴᴛᴀɪɴɪɴɢ ᴄᴏʀʀᴇᴄᴛ
 ғᴏʀᴍᴀᴛ ғᴏʀ ᴀ ᴡᴇʟᴄᴏᴍᴇ ᴍᴇssᴀɢᴇ, ᴄʜᴇᴄᴋ ᴇɴᴅ ᴏғ ᴛʜɪs ᴍᴇssᴀɢᴇ.
 
@@ -107,232 +107,232 @@ button2=[Github, https://github.com]
 """
 
 
-def get_urls_from_text(text: str) -> bool:
-    regex = r"""(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]
+defget_urls_from_text(text:str)->bool:
+    regex=r"""(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]
                 [.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(
                 \([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\
                 ()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))""".strip()
-    return [x[0] for x in findall(regex, str(text))]
+return[x[0]forxinfindall(regex,str(text))]
 
 
-def extract_text_and_keyb(ikb, text: str, row_width: int = 2):
-    keyboard = {}
-    try:
-        text = text.strip()
-        if text.startswith("`"):
-            text = text[1:]
-        if text.endswith("`"):
-            text = text[:-1]
+defextract_text_and_keyb(ikb,text:str,row_width:int=2):
+    keyboard={}
+try:
+        text=text.strip()
+iftext.startswith("`"):
+            text=text[1:]
+iftext.endswith("`"):
+            text=text[:-1]
 
-        if "~~" in text:
-            text = text.replace("~~", "¤¤")
-        text, keyb = text.split("~")
-        if "¤¤" in text:
-            text = text.replace("¤¤", "~~")
+if"~~"intext:
+            text=text.replace("~~","¤¤")
+text,keyb=text.split("~")
+if"¤¤"intext:
+            text=text.replace("¤¤","~~")
 
-        keyb = findall(r"\[.+\,.+\]", keyb)
-        for btn_str in keyb:
-            btn_str = re_sub(r"[\[\]]", "", btn_str)
-            btn_str = btn_str.split(",")
-            btn_txt, btn_url = btn_str[0], btn_str[1].strip()
+keyb=findall(r"\[.+\,.+\]",keyb)
+forbtn_strinkeyb:
+            btn_str=re_sub(r"[\[\]]","",btn_str)
+btn_str=btn_str.split(",")
+btn_txt,btn_url=btn_str[0],btn_str[1].strip()
 
-            if not get_urls_from_text(btn_url):
+ifnotget_urls_from_text(btn_url):
                 continue
-            keyboard[btn_txt] = btn_url
-        keyboard = ikb(keyboard, row_width)
-    except Exception:
+keyboard[btn_txt]=btn_url
+keyboard=ikb(keyboard,row_width)
+exceptException:
         return
-    return text, keyboard
+returntext,keyboard
 
 
-async def check_format(ikb, raw_text: str):
-    keyb = findall(r"\[.+\,.+\]", raw_text)
-    if keyb and not "~" in raw_text:
-        raw_text = raw_text.replace("button=", "\n~\nbutton=")
-        return raw_text
-    if "~" in raw_text and keyb:
-        if not extract_text_and_keyb(ikb, raw_text):
-            return ""
-        else:
-            return raw_text
-    else:
-        return raw_text
+asyncdefcheck_format(ikb,raw_text:str):
+    keyb=findall(r"\[.+\,.+\]",raw_text)
+ifkeybandnot"~"inraw_text:
+        raw_text=raw_text.replace("button=","\n~\nbutton=")
+returnraw_text
+if"~"inraw_textandkeyb:
+        ifnotextract_text_and_keyb(ikb,raw_text):
+            return""
+else:
+            returnraw_text
+else:
+        returnraw_text
 
 
-async def get_data_and_name(replied_message, message):
-    text = message.text.markdown if message.text else message.caption.markdown
-    name = text.split(None, 1)[1].strip()
-    text = name.split(" ", 1)
-    if len(text) > 1:
-        name = text[0]
-        data = text[1].strip()
-        if replied_message and (replied_message.sticker or replied_message.video_note):
-            data = None
-    else:
-        if replied_message and (replied_message.sticker or replied_message.video_note):
-            data = None
-        elif (
-            replied_message and not replied_message.text and not replied_message.caption
-        ):
-            data = None
-        else:
-            data = (
-                replied_message.text.markdown
-                if replied_message.text
-                else replied_message.caption.markdown
-            )
-            command = message.command[0]
-            match = f"/{command} " + name
-            if not message.reply_to_message and message.text:
-                if match == data:
-                    data = "error"
-            elif not message.reply_to_message and not message.text:
-                if match == data:
-                    data = None
-    return data, name
+asyncdefget_data_and_name(replied_message,message):
+    text=message.text.markdownifmessage.textelsemessage.caption.markdown
+name=text.split(None,1)[1].strip()
+text=name.split(" ",1)
+iflen(text)>1:
+        name=text[0]
+data=text[1].strip()
+ifreplied_messageand(replied_message.stickerorreplied_message.video_note):
+            data=None
+else:
+        ifreplied_messageand(replied_message.stickerorreplied_message.video_note):
+            data=None
+elif(
+replied_messageandnotreplied_message.textandnotreplied_message.caption
+):
+            data=None
+else:
+            data=(
+replied_message.text.markdown
+ifreplied_message.text
+elsereplied_message.caption.markdown
+)
+command=message.command[0]
+match=f"/{command} "+name
+ifnotmessage.reply_to_messageandmessage.text:
+                ifmatch==data:
+                    data="error"
+elifnotmessage.reply_to_messageandnotmessage.text:
+                ifmatch==data:
+                    data=None
+returndata,name
 
 
-async def extract_userid(message, text: str):
+asyncdefextract_userid(message,text:str):
     """
     NOT TO BE USED OUTSIDE THIS FILE
     """
 
-    def is_int(text: str):
+defis_int(text:str):
         try:
             int(text)
-        except ValueError:
-            return False
-        return True
+exceptValueError:
+            returnFalse
+returnTrue
 
-    text = text.strip()
+text=text.strip()
 
-    if is_int(text):
-        return int(text)
+ifis_int(text):
+        returnint(text)
 
-    entities = message.entities
-    app = message._client
-    if len(entities) < 2:
-        return (await app.get_users(text)).id
-    entity = entities[1]
-    if entity.type == MessageEntityType.MENTION:
-        return (await app.get_users(text)).id
-    if entity.type == MessageEntityType.TEXT_MENTION:
-        return entity.user.id
-    return None
-
-
-async def extract_user_and_reason(message, sender_chat=False):
-    args = message.text.strip().split()
-    text = message.text
-    user = None
-    reason = None
-
-    try:
-        if message.reply_to_message:
-            reply = message.reply_to_message
-            # if reply to a message and no reason is given
-            if not reply.from_user:
-                if (
-                    reply.sender_chat
-                    and reply.sender_chat != message.chat.id
-                    and sender_chat
-                ):
-                    id_ = reply.sender_chat.id
-                else:
-                    return None, None
-            else:
-                id_ = reply.from_user.id
-
-            if len(args) < 2:
-                reason = None
-            else:
-                reason = text.split(None, 1)[1]
-            return id_, reason
-
-        # if not reply to a message and no reason is given
-        if len(args) == 2:
-            user = text.split(None, 1)[1]
-            return await extract_userid(message, user), None
-
-        # if reason is given
-        if len(args) > 2:
-            user, reason = text.split(None, 2)[1:]
-            return await extract_userid(message, user), reason
-
-        return user, reason
-
-    except errors.UsernameInvalid:
-        return "", ""
+entities=message.entities
+app=message._client
+iflen(entities)<2:
+        return(awaitapp.get_users(text)).id
+entity=entities[1]
+ifentity.type==MessageEntityType.MENTION:
+        return(awaitapp.get_users(text)).id
+ifentity.type==MessageEntityType.TEXT_MENTION:
+        returnentity.user.id
+returnNone
 
 
-async def extract_user(message):
-    return (await extract_user_and_reason(message))[0]
+asyncdefextract_user_and_reason(message,sender_chat=False):
+    args=message.text.strip().split()
+text=message.text
+user=None
+reason=None
 
+try:
+        ifmessage.reply_to_message:
+            reply=message.reply_to_message
 
-def get_file_id_from_message(
-    message,
-    max_file_size=3145728,
-    mime_types=["image/png", "image/jpeg"],
+ifnotreply.from_user:
+                if(
+reply.sender_chat
+andreply.sender_chat!=message.chat.id
+andsender_chat
 ):
-    file_id = None
-    if message.document:
-        if int(message.document.file_size) > max_file_size:
+                    id_=reply.sender_chat.id
+else:
+                    returnNone,None
+else:
+                id_=reply.from_user.id
+
+iflen(args)<2:
+                reason=None
+else:
+                reason=text.split(None,1)[1]
+returnid_,reason
+
+
+iflen(args)==2:
+            user=text.split(None,1)[1]
+returnawaitextract_userid(message,user),None
+
+
+iflen(args)>2:
+            user,reason=text.split(None,2)[1:]
+returnawaitextract_userid(message,user),reason
+
+returnuser,reason
+
+excepterrors.UsernameInvalid:
+        return"",""
+
+
+asyncdefextract_user(message):
+    return(awaitextract_user_and_reason(message))[0]
+
+
+defget_file_id_from_message(
+message,
+max_file_size=3145728,
+mime_types=["image/png","image/jpeg"],
+):
+    file_id=None
+ifmessage.document:
+        ifint(message.document.file_size)>max_file_size:
             return
 
-        mime_type = message.document.mime_type
+mime_type=message.document.mime_type
 
-        if mime_types and mime_type not in mime_types:
+ifmime_typesandmime_typenotinmime_types:
             return
-        file_id = message.document.file_id
+file_id=message.document.file_id
 
-    if message.sticker:
-        if message.sticker.is_animated:
-            if not message.sticker.thumbs:
+ifmessage.sticker:
+        ifmessage.sticker.is_animated:
+            ifnotmessage.sticker.thumbs:
                 return
-            file_id = message.sticker.thumbs[0].file_id
-        else:
-            file_id = message.sticker.file_id
+file_id=message.sticker.thumbs[0].file_id
+else:
+            file_id=message.sticker.file_id
 
-    if message.photo:
-        file_id = message.photo.file_id
+ifmessage.photo:
+        file_id=message.photo.file_id
 
-    if message.animation:
-        if not message.animation.thumbs:
+ifmessage.animation:
+        ifnotmessage.animation.thumbs:
             return
-        file_id = message.animation.thumbs[0].file_id
+file_id=message.animation.thumbs[0].file_id
 
-    if message.video:
-        if not message.video.thumbs:
+ifmessage.video:
+        ifnotmessage.video.thumbs:
             return
-        file_id = message.video.thumbs[0].file_id
-    return file_id
+file_id=message.video.thumbs[0].file_id
+returnfile_id
 
 
-async def time_converter(message: Message, time_value: str) -> datetime:
-    unit = ["m", "h", "d"]
-    check_unit = "".join(list(filter(time_value[-1].lower().endswith, unit)))
-    currunt_time = datetime.now()
-    time_digit = time_value[:-1]
-    if not time_digit.isdigit():
-        return await message.reply_text("Incorrect time specified")
-    if check_unit == "m":
-        temp_time = currunt_time + timedelta(minutes=int(time_digit))
-    elif check_unit == "h":
-        temp_time = currunt_time + timedelta(hours=int(time_digit))
-    elif check_unit == "d":
-        temp_time = currunt_time + timedelta(days=int(time_digit))
-    else:
-        return await message.reply_text("Incorrect time specified.")
-    return temp_time
+asyncdeftime_converter(message:Message,time_value:str)->datetime:
+    unit=["m","h","d"]
+check_unit="".join(list(filter(time_value[-1].lower().endswith,unit)))
+currunt_time=datetime.now()
+time_digit=time_value[:-1]
+ifnottime_digit.isdigit():
+        returnawaitmessage.reply_text("Incorrect time specified")
+ifcheck_unit=="m":
+        temp_time=currunt_time+timedelta(minutes=int(time_digit))
+elifcheck_unit=="h":
+        temp_time=currunt_time+timedelta(hours=int(time_digit))
+elifcheck_unit=="d":
+        temp_time=currunt_time+timedelta(days=int(time_digit))
+else:
+        returnawaitmessage.reply_text("Incorrect time specified.")
+returntemp_time
 
 
-# ©️ Copyright Reserved - @NoxxOP  Nand Yaduwanshi
-
-# ===========================================
-# ©️ 2025 Nand Yaduwanshi (aka @NoxxOP)
-# 🔗 GitHub : https://github.com/NoxxOP/ShrutiMusic
-# 📢 Telegram Channel : https://t.me/ShrutiBots
-# ===========================================
 
 
-# ❤️ Love From ShrutiBots 
+
+
+
+
+
+
+
+

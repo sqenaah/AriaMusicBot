@@ -1,54 +1,54 @@
-# Copyright (c) 2025 Nand Yaduwanshi <NoxxOP>
-# Location: Supaul, Bihar
-#
-# All rights reserved.
-#
-# This code is the intellectual property of Nand Yaduwanshi.
-# You are not allowed to copy, modify, redistribute, or use this
-# code for commercial or personal projects without explicit permission.
-#
-# Allowed:
-# - Forking for personal learning
-# - Submitting improvements via pull requests
-#
-# Not Allowed:
-# - Claiming this code as your own
-# - Re-uploading without credit or permission
-# - Selling or using commercially
-#
-# Contact for permissions:
-# Email: badboy809075@gmail.com
+utf-8utf-8
 
 
-import os
-
-from ..logging import LOGGER
 
 
-def dirr():
-    for file in os.listdir():
-        if file.endswith(".jpg"):
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+importos
+
+from..loggingimportLOGGER
+
+
+defdirr():
+    forfileinos.listdir():
+        iffile.endswith(".jpg"):
             os.remove(file)
-        elif file.endswith(".jpeg"):
+eliffile.endswith(".jpeg"):
             os.remove(file)
-        elif file.endswith(".png"):
+eliffile.endswith(".png"):
             os.remove(file)
 
-    if "downloads" not in os.listdir():
+if"downloads"notinos.listdir():
         os.mkdir("downloads")
-    if "cache" not in os.listdir():
+if"cache"notinos.listdir():
         os.mkdir("cache")
 
-    LOGGER(__name__).info("Directories Updated.")
+LOGGER(__name__).info("Directories Updated.")
 
 
-# ©️ Copyright Reserved - @NoxxOP  Nand Yaduwanshi
-
-# ===========================================
-# ©️ 2025 Nand Yaduwanshi (aka @NoxxOP)
-# 🔗 GitHub : https://github.com/NoxxOP/ShrutiMusic
-# 📢 Telegram Channel : https://t.me/ShrutiBots
-# ===========================================
 
 
-# ❤️ Love From ShrutiBots 
+
+
+
+
+
+
+
+

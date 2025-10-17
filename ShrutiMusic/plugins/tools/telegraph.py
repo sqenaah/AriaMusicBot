@@ -1,108 +1,108 @@
-# Copyright (c) 2025 Nand Yaduwanshi <NoxxOP>
-# Location: Supaul, Bihar
-#
-# All rights reserved.
-#
-# This code is the intellectual property of Nand Yaduwanshi.
-# You are not allowed to copy, modify, redistribute, or use this
-# code for commercial or personal projects without explicit permission.
-#
-# Allowed:
-# - Forking for personal learning
-# - Submitting improvements via pull requests
-#
-# Not Allowed:
-# - Claiming this code as your own
-# - Re-uploading without credit or permission
-# - Selling or using commercially
-#
-# Contact for permissions:
-# Email: badboy809075@gmail.com
+utf-8utf-8
 
 
-import os
-import requests
-from pyrogram import filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from ShrutiMusic import app
 
 
-def upload_file(file_path):
-    url = "https://catbox.moe/user/api.php"
-    data = {"reqtype": "fileupload", "json": "true"}
-    files = {"fileToUpload": open(file_path, "rb")}
-    response = requests.post(url, data=data, files=files)
 
-    if response.status_code == 200:
-        return True, response.text.strip()
-    else:
-        return False, f"Error: {response.status_code} - {response.text}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+importos
+importrequests
+frompyrogramimportfilters
+frompyrogram.typesimportInlineKeyboardButton,InlineKeyboardMarkup
+fromShrutiMusicimportapp
+
+
+defupload_file(file_path):
+    url="https://catbox.moe/user/api.php"
+data={"reqtype":"fileupload","json":"true"}
+files={"fileToUpload":open(file_path,"rb")}
+response=requests.post(url,data=data,files=files)
+
+ifresponse.status_code==200:
+        returnTrue,response.text.strip()
+else:
+        returnFalse,f"Error: {response.status_code} - {response.text}"
 
 
 @app.on_message(filters.command(["tgm"]))
-async def get_link_group(client, message):
-    if not message.reply_to_message:
-        return await message.reply_text(
-            "Pʟᴇᴀsᴇ ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇᴅɪᴀ"
-        )
+asyncdefget_link_group(client,message):
+    ifnotmessage.reply_to_message:
+        returnawaitmessage.reply_text(
+"Pʟᴇᴀsᴇ ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇᴅɪᴀ"
+)
 
-    media = message.reply_to_message
-    file_size = 0
-    if media.photo:
-        file_size = media.photo.file_size
-    elif media.video:
-        file_size = media.video.file_size
-    elif media.document:
-        file_size = media.document.file_size
+media=message.reply_to_message
+file_size=0
+ifmedia.photo:
+        file_size=media.photo.file_size
+elifmedia.video:
+        file_size=media.video.file_size
+elifmedia.document:
+        file_size=media.document.file_size
 
-    if file_size > 200 * 1024 * 1024:
-        return await message.reply_text("Pʟᴇᴀsᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ ᴍᴇᴅɪᴀ ғɪʟᴇ ᴜɴᴅᴇʀ 200MB.")
+iffile_size>200*1024*1024:
+        returnawaitmessage.reply_text("Pʟᴇᴀsᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ ᴍᴇᴅɪᴀ ғɪʟᴇ ᴜɴᴅᴇʀ 200MB.")
 
-    try:
-        text = await message.reply("❍ ʜᴏʟᴅ ᴏɴ ʙᴀʙʏ....♡")
+try:
+        text=awaitmessage.reply("❍ ʜᴏʟᴅ ᴏɴ ʙᴀʙʏ....♡")
 
-        async def progress(current, total):
+asyncdefprogress(current,total):
             try:
-                await text.edit_text(f"📥 Dᴏᴡɴʟᴏᴀᴅɪɴɢ... {current * 100 / total:.1f}%")
-            except Exception:
+                awaittext.edit_text(f"📥 Dᴏᴡɴʟᴏᴀᴅɪɴɢ... {current * 100 / total:.1f}%")
+exceptException:
                 pass
 
-        try:
-            local_path = await media.download(progress=progress)
-            await text.edit_text("📤 Uᴘʟᴏᴀᴅɪɴɢ...")
+try:
+            local_path=awaitmedia.download(progress=progress)
+awaittext.edit_text("📤 Uᴘʟᴏᴀᴅɪɴɢ...")
 
-            success, upload_url = upload_file(local_path)
+success,upload_url=upload_file(local_path)
 
-            if success:
-                await text.edit_text(
-                    f"🌐 | <a href='{upload_url}'>👉 ʏᴏᴜʀ ʟɪɴᴋ ᴛᴀᴘ ʜᴇʀᴇ 👈</a>",
-                    disable_web_page_preview=False,
-                    reply_markup=InlineKeyboardMarkup(
-                        [[InlineKeyboardButton("🌍 ᴘʀᴇss ᴀɴᴅ ʜᴏʟᴅ ᴛᴏ ᴠɪᴇᴡ", url=upload_url)]]
-                    ),
-                )
-            else:
-                await text.edit_text(
-                    f"⚠️ Aɴ ᴇʀʀᴏʀ ᴏᴄᴄᴜʀʀᴇᴅ ᴡʜɪʟᴇ ᴜᴘʟᴏᴀᴅɪɴɢ ʏᴏᴜʀ ғɪʟᴇ\n{upload_url}"
-                )
+ifsuccess:
+                awaittext.edit_text(
+f"🌐 | <a href='{upload_url}'>👉 ʏᴏᴜʀ ʟɪɴᴋ ᴛᴀᴘ ʜᴇʀᴇ 👈</a>",
+disable_web_page_preview=False,
+reply_markup=InlineKeyboardMarkup(
+[[InlineKeyboardButton("🌍 ᴘʀᴇss ᴀɴᴅ ʜᴏʟᴅ ᴛᴏ ᴠɪᴇᴡ",url=upload_url)]]
+),
+)
+else:
+                awaittext.edit_text(
+f"⚠️ Aɴ ᴇʀʀᴏʀ ᴏᴄᴄᴜʀʀᴇᴅ ᴡʜɪʟᴇ ᴜᴘʟᴏᴀᴅɪɴɢ ʏᴏᴜʀ ғɪʟᴇ\n{upload_url}"
+)
 
-            try:
+try:
                 os.remove(local_path)
-            except Exception:
+exceptException:
                 pass
 
-        except Exception as e:
-            await text.edit_text(f"❌ Fɪʟᴇ ᴜᴘʟᴏᴀᴅ ғᴀɪʟᴇᴅ\n\n<i>Rᴇᴀsᴏɴ: {e}</i>")
-            try:
+exceptExceptionase:
+            awaittext.edit_text(f"❌ Fɪʟᴇ ᴜᴘʟᴏᴀᴅ ғᴀɪʟᴇᴅ\n\n<i>Rᴇᴀsᴏɴ: {e}</i>")
+try:
                 os.remove(local_path)
-            except Exception:
+exceptException:
                 pass
-            return
-    except Exception:
+return
+exceptException:
         pass
 
 
-__HELP__ = """
+__HELP__="""
 **ᴛᴇʟᴇɢʀᴀᴘʜ ᴜᴘʟᴏᴀᴅ ʙᴏᴛ ᴄᴏᴍᴍᴀɴᴅs**
 
 ᴜsᴇ ᴛʜᴇsᴇ ᴄᴏᴍᴍᴀɴᴅs ᴛᴏ ᴜᴘʟᴏᴀᴅ ᴍᴇᴅɪᴀ ᴛᴏ ᴛᴇʟᴇɢʀᴀᴘʜ:
@@ -116,16 +116,16 @@ __HELP__ = """
 ʏᴏᴜ ᴍᴜsᴛ ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇᴅɪᴀ ғɪʟᴇ ғᴏʀ ᴛʜᴇ ᴜᴘʟᴏᴀᴅ ᴛᴏ ᴡᴏʀᴋ.
 """
 
-__MODULE__ = "ᴛᴇʟᴇɢʀᴀᴘʜ"
+__MODULE__="ᴛᴇʟᴇɢʀᴀᴘʜ"
 
 
-# ©️ Copyright Reserved - @NoxxOP  Nand Yaduwanshi
-
-# ===========================================
-# ©️ 2025 Nand Yaduwanshi (aka @NoxxOP)
-# 🔗 GitHub : https://github.com/NoxxOP/ShrutiMusic
-# 📢 Telegram Channel : https://t.me/ShrutiBots
-# ===========================================
 
 
-# ❤️ Love From ShrutiBots 
+
+
+
+
+
+
+
+

@@ -1,94 +1,94 @@
-# Copyright (c) 2025 Nand Yaduwanshi <NoxxOP>
-# Location: Supaul, Bihar
-#
-# All rights reserved.
-#
-# This code is the intellectual property of Nand Yaduwanshi.
-# You are not allowed to copy, modify, redistribute, or use this
-# code for commercial or personal projects without explicit permission.
-#
-# Allowed:
-# - Forking for personal learning
-# - Submitting improvements via pull requests
-#
-# Not Allowed:
-# - Claiming this code as your own
-# - Re-uploading without credit or permission
-# - Selling or using commercially
-#
-# Contact for permissions:
-# Email: badboy809075@gmail.com
+utf-8utf-8
 
 
-import requests
-from pyrogram import filters
-from pyrogram.types import Message
 
-from ShrutiMusic import app
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+importrequests
+frompyrogramimportfilters
+frompyrogram.typesimportMessage
+
+fromShrutiMusicimportapp
 
 
 @app.on_message(
-    filters.command(
-        [
-            "dice",
-            "ludo",
-            "dart",
-            "basket",
-            "basketball",
-            "football",
-            "slot",
-            "bowling",
-            "jackpot",
-        ]
-    )
+filters.command(
+[
+"dice",
+"ludo",
+"dart",
+"basket",
+"basketball",
+"football",
+"slot",
+"bowling",
+"jackpot",
+]
 )
-async def dice(c, m: Message):
-    command = m.text.split()[0]
-    if command == "/dice" or command == "/ludo":
+)
+asyncdefdice(c,m:Message):
+    command=m.text.split()[0]
+ifcommand=="/dice"orcommand=="/ludo":
 
-        value = await c.send_dice(m.chat.id, reply_to_message_id=m.id)
-        await value.reply_text("ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {0}".format(value.dice.value))
+        value=awaitc.send_dice(m.chat.id,reply_to_message_id=m.id)
+awaitvalue.reply_text("ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {0}".format(value.dice.value))
 
-    elif command == "/dart":
+elifcommand=="/dart":
 
-        value = await c.send_dice(m.chat.id, emoji="🎯", reply_to_message_id=m.id)
-        await value.reply_text("ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {0}".format(value.dice.value))
+        value=awaitc.send_dice(m.chat.id,emoji="🎯",reply_to_message_id=m.id)
+awaitvalue.reply_text("ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {0}".format(value.dice.value))
 
-    elif command == "/basket" or command == "/basketball":
-        basket = await c.send_dice(m.chat.id, emoji="🏀", reply_to_message_id=m.id)
-        await basket.reply_text("ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {0}".format(basket.dice.value))
+elifcommand=="/basket"orcommand=="/basketball":
+        basket=awaitc.send_dice(m.chat.id,emoji="🏀",reply_to_message_id=m.id)
+awaitbasket.reply_text("ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {0}".format(basket.dice.value))
 
-    elif command == "/football":
-        value = await c.send_dice(m.chat.id, emoji="⚽", reply_to_message_id=m.id)
-        await value.reply_text("ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {0}".format(value.dice.value))
+elifcommand=="/football":
+        value=awaitc.send_dice(m.chat.id,emoji="⚽",reply_to_message_id=m.id)
+awaitvalue.reply_text("ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {0}".format(value.dice.value))
 
-    elif command == "/slot" or command == "/jackpot":
-        value = await c.send_dice(m.chat.id, emoji="🎰", reply_to_message_id=m.id)
-        await value.reply_text("ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {0}".format(value.dice.value))
-    elif command == "/bowling":
-        value = await c.send_dice(m.chat.id, emoji="🎳", reply_to_message_id=m.id)
-        await value.reply_text("ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {0}".format(value.dice.value))
-
-
-bored_api_url = "https://apis.scrimba.com/bored/api/activity"
+elifcommand=="/slot"orcommand=="/jackpot":
+        value=awaitc.send_dice(m.chat.id,emoji="🎰",reply_to_message_id=m.id)
+awaitvalue.reply_text("ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {0}".format(value.dice.value))
+elifcommand=="/bowling":
+        value=awaitc.send_dice(m.chat.id,emoji="🎳",reply_to_message_id=m.id)
+awaitvalue.reply_text("ʏᴏᴜʀ sᴄᴏʀᴇ ɪs {0}".format(value.dice.value))
 
 
-@app.on_message(filters.command("bored", prefixes="/"))
-async def bored_command(client, message):
-    response = requests.get(bored_api_url)
-    if response.status_code == 200:
-        data = response.json()
-        activity = data.get("activity")
-        if activity:
-            await message.reply(f"𝗙𝗲𝗲𝗹𝗶𝗻𝗴 𝗯𝗼𝗿𝗲𝗱? 𝗛𝗼𝘄 𝗮𝗯𝗼𝘂𝘁:\n\n {activity}")
-        else:
-            await message.reply("Nᴏ ᴀᴄᴛɪᴠɪᴛʏ ғᴏᴜɴᴅ.")
-    else:
-        await message.reply("Fᴀɪʟᴇᴅ ᴛᴏ ғᴇᴛᴄʜ ᴀᴄᴛɪᴠɪᴛʏ.")
+bored_api_url="https://apis.scrimba.com/bored/api/activity"
 
 
-__MODULE__ = "Fᴜɴ"
-__HELP__ = """
+@app.on_message(filters.command("bored",prefixes="/"))
+asyncdefbored_command(client,message):
+    response=requests.get(bored_api_url)
+ifresponse.status_code==200:
+        data=response.json()
+activity=data.get("activity")
+ifactivity:
+            awaitmessage.reply(f"𝗙𝗲𝗲𝗹𝗶𝗻𝗴 𝗯𝗼𝗿𝗲𝗱? 𝗛𝗼𝘄 𝗮𝗯𝗼𝘂𝘁:\n\n {activity}")
+else:
+            awaitmessage.reply("Nᴏ ᴀᴄᴛɪᴠɪᴛʏ ғᴏᴜɴᴅ.")
+else:
+        awaitmessage.reply("Fᴀɪʟᴇᴅ ᴛᴏ ғᴇᴛᴄʜ ᴀᴄᴛɪᴠɪᴛʏ.")
+
+
+__MODULE__="Fᴜɴ"
+__HELP__="""
 **ʜᴀᴠɪɴɢ ꜰᴜɴ:**
 
 • `/dice`: Rᴏʟʟs ᴀ ᴅɪᴄᴇ.
@@ -102,13 +102,13 @@ __HELP__ = """
 """
 
 
-# ©️ Copyright Reserved - @NoxxOP  Nand Yaduwanshi
-
-# ===========================================
-# ©️ 2025 Nand Yaduwanshi (aka @NoxxOP)
-# 🔗 GitHub : https://github.com/NoxxOP/ShrutiMusic
-# 📢 Telegram Channel : https://t.me/ShrutiBots
-# ===========================================
 
 
-# ❤️ Love From ShrutiBots 
+
+
+
+
+
+
+
+

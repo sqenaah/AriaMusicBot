@@ -1,95 +1,95 @@
-# Copyright (c) 2025 Nand Yaduwanshi <NoxxOP>
-# Location: Supaul, Bihar
-#
-# All rights reserved.
-#
-# This code is the intellectual property of Nand Yaduwanshi.
-# You are not allowed to copy, modify, redistribute, or use this
-# code for commercial or personal projects without explicit permission.
-#
-# Allowed:
-# - Forking for personal learning
-# - Submitting improvements via pull requests
-#
-# Not Allowed:
-# - Claiming this code as your own
-# - Re-uploading without credit or permission
-# - Selling or using commercially
-#
-# Contact for permissions:
-# Email: badboy809075@gmail.com
+utf-8utf-8
 
 
-from pyrogram import filters
-
-from ShrutiMusic import YouTube, app
-from ShrutiMusic.utils.channelplay import get_channeplayCB
-from ShrutiMusic.utils.decorators.language import languageCB
-from ShrutiMusic.utils.stream.stream import stream
-from config import BANNED_USERS
 
 
-@app.on_callback_query(filters.regex("LiveStream") & ~BANNED_USERS)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+frompyrogramimportfilters
+
+fromShrutiMusicimportYouTube,app
+fromShrutiMusic.utils.channelplayimportget_channeplayCB
+fromShrutiMusic.utils.decorators.languageimportlanguageCB
+fromShrutiMusic.utils.stream.streamimportstream
+fromconfigimportBANNED_USERS
+
+
+@app.on_callback_query(filters.regex("LiveStream")&~BANNED_USERS)
 @languageCB
-async def play_live_stream(client, CallbackQuery, _):
-    callback_data = CallbackQuery.data.strip()
-    callback_request = callback_data.split(None, 1)[1]
-    vidid, user_id, mode, cplay, fplay = callback_request.split("|")
-    if CallbackQuery.from_user.id != int(user_id):
+asyncdefplay_live_stream(client,CallbackQuery,_):
+    callback_data=CallbackQuery.data.strip()
+callback_request=callback_data.split(None,1)[1]
+vidid,user_id,mode,cplay,fplay=callback_request.split("|")
+ifCallbackQuery.from_user.id!=int(user_id):
         try:
-            return await CallbackQuery.answer(_["playcb_1"], show_alert=True)
-        except:
+            returnawaitCallbackQuery.answer(_["playcb_1"],show_alert=True)
+except:
             return
-    try:
-        chat_id, channel = await get_channeplayCB(_, cplay, CallbackQuery)
-    except:
+try:
+        chat_id,channel=awaitget_channeplayCB(_,cplay,CallbackQuery)
+except:
         return
-    video = True if mode == "v" else None
-    user_name = CallbackQuery.from_user.first_name
-    await CallbackQuery.message.delete()
-    try:
-        await CallbackQuery.answer()
-    except:
+video=Trueifmode=="v"elseNone
+user_name=CallbackQuery.from_user.first_name
+awaitCallbackQuery.message.delete()
+try:
+        awaitCallbackQuery.answer()
+except:
         pass
-    mystic = await CallbackQuery.message.reply_text(
-        _["play_2"].format(channel) if channel else _["play_1"]
-    )
-    try:
-        details, track_id = await YouTube.track(vidid, True)
-    except:
-        return await mystic.edit_text(_["play_3"])
-    ffplay = True if fplay == "f" else None
-    if not details["duration_min"]:
+mystic=awaitCallbackQuery.message.reply_text(
+_["play_2"].format(channel)ifchannelelse_["play_1"]
+)
+try:
+        details,track_id=awaitYouTube.track(vidid,True)
+except:
+        returnawaitmystic.edit_text(_["play_3"])
+ffplay=Trueiffplay=="f"elseNone
+ifnotdetails["duration_min"]:
         try:
-            await stream(
-                _,
-                mystic,
-                user_id,
-                details,
-                chat_id,
-                user_name,
-                CallbackQuery.message.chat.id,
-                video,
-                streamtype="live",
-                forceplay=ffplay,
-            )
-        except Exception as e:
+            awaitstream(
+_,
+mystic,
+user_id,
+details,
+chat_id,
+user_name,
+CallbackQuery.message.chat.id,
+video,
+streamtype="live",
+forceplay=ffplay,
+)
+exceptExceptionase:
             print(f"Error: {e}")
-            ex_type = type(e).__name__
-            err = e if ex_type == "AssistantErr" else _["general_2"].format(ex_type)
-            return await mystic.edit_text(err)
-    else:
-        return await mystic.edit_text("» ɴᴏᴛ ᴀ ʟɪᴠᴇ sᴛʀᴇᴀᴍ.")
-    await mystic.delete()
+ex_type=type(e).__name__
+err=eifex_type=="AssistantErr"else_["general_2"].format(ex_type)
+returnawaitmystic.edit_text(err)
+else:
+        returnawaitmystic.edit_text("» ɴᴏᴛ ᴀ ʟɪᴠᴇ sᴛʀᴇᴀᴍ.")
+awaitmystic.delete()
 
 
-# ©️ Copyright Reserved - @NoxxOP  Nand Yaduwanshi
-
-# ===========================================
-# ©️ 2025 Nand Yaduwanshi (aka @NoxxOP)
-# 🔗 GitHub : https://github.com/NoxxOP/ShrutiMusic
-# 📢 Telegram Channel : https://t.me/ShrutiBots
-# ===========================================
 
 
-# ❤️ Love From ShrutiBots 
+
+
+
+
+
+
+
+

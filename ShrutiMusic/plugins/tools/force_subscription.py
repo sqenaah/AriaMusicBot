@@ -1,198 +1,198 @@
-# Copyright (c) 2025 Nand Yaduwanshi <NoxxOP>
-# Location: Supaul, Bihar
-#
-# All rights reserved.
-#
-# This code is the intellectual property of Nand Yaduwanshi.
-# You are not allowed to copy, modify, redistribute, or use this
-# code for commercial or personal projects without explicit permission.
-#
-# Allowed:
-# - Forking for personal learning
-# - Submitting improvements via pull requests
-#
-# Not Allowed:
-# - Claiming this code as your own
-# - Re-uploading without credit or permission
-# - Selling or using commercially
-#
-# Contact for permissions:
-# Email: badboy809075@gmail.com
+utf-8utf-8
 
 
-from pyrogram import Client, filters
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, ChatPermissions
-from pymongo import MongoClient
-from ShrutiMusic import app
-import asyncio
-from ShrutiMusic.misc import SUDOERS
-from config import MONGO_DB_URI
-from pyrogram.enums import ChatMembersFilter
-from pyrogram.errors import (
-    ChatAdminRequired,
-    UserNotParticipant,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+frompyrogramimportClient,filters
+frompyrogram.typesimportMessage,InlineKeyboardMarkup,InlineKeyboardButton,CallbackQuery,ChatPermissions
+frompymongoimportMongoClient
+fromShrutiMusicimportapp
+importasyncio
+fromShrutiMusic.miscimportSUDOERS
+fromconfigimportMONGO_DB_URI
+frompyrogram.enumsimportChatMembersFilter
+frompyrogram.errorsimport(
+ChatAdminRequired,
+UserNotParticipant,
 )
 
-fsubdb = MongoClient(MONGO_DB_URI)
-forcesub_collection = fsubdb.status_db.status
+fsubdb=MongoClient(MONGO_DB_URI)
+forcesub_collection=fsubdb.status_db.status
 
-@app.on_message(filters.command(["fsub", "forcesub"]) & filters.group)
-async def set_forcesub(client: Client, message: Message):
-    chat_id = message.chat.id
-    user_id = message.from_user.id
+@app.on_message(filters.command(["fsub","forcesub"])&filters.group)
+asyncdefset_forcesub(client:Client,message:Message):
+    chat_id=message.chat.id
+user_id=message.from_user.id
 
-    member = await client.get_chat_member(chat_id, user_id)
-    # Allow sudoers, group owner, and group admins
-    if not (member.status in ["owner", "administrator"] or user_id in SUDOERS):
-        return await message.reply_text("**ᴏɴʟʏ ɢʀᴏᴜᴘ ᴀᴅᴍɪɴs ᴏʀ sᴜᴅᴏᴇʀs ᴄᴀɴ ᴜsᴇ ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ.**")
+member=awaitclient.get_chat_member(chat_id,user_id)
 
-    if len(message.command) == 2 and message.command[1].lower() in ["off", "disable"]:
-        forcesub_collection.delete_one({"chat_id": chat_id})
-        return await message.reply_text("**ғᴏʀᴄᴇ sᴜʙsᴄʀɪᴘᴛɪᴏɴ ʜᴀs ʙᴇᴇɴ ᴅɪsᴀʙʟᴇᴅ ғᴏʀ ᴛʜɪs ɢʀᴏᴜᴘ.**")
+ifnot(member.statusin["owner","administrator"]oruser_idinSUDOERS):
+        returnawaitmessage.reply_text("**ᴏɴʟʏ ɢʀᴏᴜᴘ ᴀᴅᴍɪɴs ᴏʀ sᴜᴅᴏᴇʀs ᴄᴀɴ ᴜsᴇ ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ.**")
 
-    if len(message.command) != 2:
-        return await message.reply_text("**ᴜsᴀɢᴇ: /ғsᴜʙ <ᴄʜᴀɴɴᴇʟ ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ɪᴅ> ᴏʀ /ғsᴜʙ ᴏғғ ᴛᴏ ᴅɪsᴀʙʟᴇ**")
+iflen(message.command)==2andmessage.command[1].lower()in["off","disable"]:
+        forcesub_collection.delete_one({"chat_id":chat_id})
+returnawaitmessage.reply_text("**ғᴏʀᴄᴇ sᴜʙsᴄʀɪᴘᴛɪᴏɴ ʜᴀs ʙᴇᴇɴ ᴅɪsᴀʙʟᴇᴅ ғᴏʀ ᴛʜɪs ɢʀᴏᴜᴘ.**")
 
-    channel_input = message.command[1]
+iflen(message.command)!=2:
+        returnawaitmessage.reply_text("**ᴜsᴀɢᴇ: /ғsᴜʙ <ᴄʜᴀɴɴᴇʟ ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ɪᴅ> ᴏʀ /ғsᴜʙ ᴏғғ ᴛᴏ ᴅɪsᴀʙʟᴇ**")
 
-    try:
-        channel_info = await client.get_chat(channel_input)
-        channel_id = channel_info.id
-        channel_username = f"{channel_info.username}" if channel_info.username else None
+channel_input=message.command[1]
 
-        forcesub_collection.update_one(
-            {"chat_id": chat_id},
-            {"$set": {"channel_id": channel_id, "channel_username": channel_username}},
-            upsert=True
-        )
+try:
+        channel_info=awaitclient.get_chat(channel_input)
+channel_id=channel_info.id
+channel_username=f"{channel_info.username}"ifchannel_info.usernameelseNone
 
-        await message.reply_text(f"**🎉 Force subscription set to channel:** [{channel_info.title}](https://t.me/{channel_username})")
+forcesub_collection.update_one(
+{"chat_id":chat_id},
+{"$set":{"channel_id":channel_id,"channel_username":channel_username}},
+upsert=True
+)
 
-    except Exception as e:
-        await message.reply_text("**🚫 Failed to set force subscription.**")
-        
+awaitmessage.reply_text(f"**🎉 Force subscription set to channel:** [{channel_info.title}](https://t.me/{channel_username})")
+
+exceptExceptionase:
+        awaitmessage.reply_text("**🚫 Failed to set force subscription.**")
+
 @app.on_chat_member_updated()
-async def on_user_join(client: Client, chat_member_updated):
-    chat_id = chat_member_updated.chat.id
-    user_id = chat_member_updated.from_user.id
-    forcesub_data = forcesub_collection.find_one({"chat_id": chat_id})
+asyncdefon_user_join(client:Client,chat_member_updated):
+    chat_id=chat_member_updated.chat.id
+user_id=chat_member_updated.from_user.id
+forcesub_data=forcesub_collection.find_one({"chat_id":chat_id})
 
-    if not forcesub_data:
-        return  # No force subscription set for this group
+ifnotforcesub_data:
+        return
 
-    channel_id = forcesub_data["channel_id"]
-    channel_username = forcesub_data["channel_username"]
+channel_id=forcesub_data["channel_id"]
+channel_username=forcesub_data["channel_username"]
 
-    new_chat_member = chat_member_updated.new_chat_member
-    if new_chat_member is None:
-        return  # Exit if new_chat_member is None
+new_chat_member=chat_member_updated.new_chat_member
+ifnew_chat_memberisNone:
+        return
 
-    # Check if the user joined the group
-    if new_chat_member.status == "member":
+
+ifnew_chat_member.status=="member":
         try:
-            # Check if the user is a member of the channel
-            user_member = await app.get_chat_member(channel_id, user_id)
-            # If the user is a member of the channel, do nothing
-            return
-        except UserNotParticipant:
-            # User is not a member of the channel, mute them
-            await client.restrict_chat_member(
-                chat_id,
-                user_id,
-                permissions=ChatPermissions(can_send_messages=False)
-            )
-            await client.send_message(
-                chat_id,
-                f"**🚫 {chat_member_updated.from_user.mention}, you have been muted because you need to join the [channel](https://t.me/{channel_username}) to send messages in this group.**",
-                disable_web_page_preview=True
-            )
-        except Exception as e:
-            # Handle any other exceptions if necessary
+
+            user_member=awaitapp.get_chat_member(channel_id,user_id)
+
+return
+exceptUserNotParticipant:
+
+            awaitclient.restrict_chat_member(
+chat_id,
+user_id,
+permissions=ChatPermissions(can_send_messages=False)
+)
+awaitclient.send_message(
+chat_id,
+f"**🚫 {chat_member_updated.from_user.mention}, you have been muted because you need to join the [channel](https://t.me/{channel_username}) to send messages in this group.**",
+disable_web_page_preview=True
+)
+exceptExceptionase:
+
             print(f"Error checking channel membership: {e}")
-    else:
-        # If the user is no longer a member, check if they can be unmuted
+else:
+
         try:
-            user_member = await app.get_chat_member(channel_id, user_id)
-            # If the user is now a member of the channel, unmute them
-            if user_member.status == "member":
-                await client.restrict_chat_member(
-                    chat_id,
-                    user_id,
-                    permissions=ChatPermissions(can_send_messages=True)
-                )
-                await client.send_message(
-                    chat_id,
-                    f"**🎉 {chat_member_updated.from_user.mention}, you have been unmuted because you joined the [channel](https://t.me/{channel_username}).**",
-                    disable_web_page_preview=True
-                )
-        except UserNotParticipant:
-            # User is still not a member of the channel, do nothing
+            user_member=awaitapp.get_chat_member(channel_id,user_id)
+
+ifuser_member.status=="member":
+                awaitclient.restrict_chat_member(
+chat_id,
+user_id,
+permissions=ChatPermissions(can_send_messages=True)
+)
+awaitclient.send_message(
+chat_id,
+f"**🎉 {chat_member_updated.from_user.mention}, you have been unmuted because you joined the [channel](https://t.me/{channel_username}).**",
+disable_web_page_preview=True
+)
+exceptUserNotParticipant:
+
             pass
-        except Exception as e:
-            # Handle any other exceptions if necessary
+exceptExceptionase:
+
             print(f"Error checking channel membership on unmute: {e}")
-            
+
 @app.on_callback_query(filters.regex("close_force_sub"))
-async def close_force_sub(client: Client, callback_query: CallbackQuery):
-    await callback_query.answer("ᴄʟᴏsᴇᴅ!")
-    await callback_query.message.delete()
-    
+asyncdefclose_force_sub(client:Client,callback_query:CallbackQuery):
+    awaitcallback_query.answer("ᴄʟᴏsᴇᴅ!")
+awaitcallback_query.message.delete()
 
-async def check_forcesub(client: Client, message: Message):
-    chat_id = message.chat.id
 
-    # Check if the message has a from_user attribute
-    if message.from_user is None:
-        return  # Exit if the message does not come from a user
+asyncdefcheck_forcesub(client:Client,message:Message):
+    chat_id=message.chat.id
 
-    user_id = message.from_user.id
-    forcesub_data = forcesub_collection.find_one({"chat_id": chat_id})
-    if not forcesub_data:
+
+ifmessage.from_userisNone:
         return
 
-    channel_id = forcesub_data["channel_id"]
-    channel_username = forcesub_data["channel_username"]
+user_id=message.from_user.id
+forcesub_data=forcesub_collection.find_one({"chat_id":chat_id})
+ifnotforcesub_data:
+        return
 
-    try:
-        user_member = await app.get_chat_member(channel_id, user_id)
-        if user_member:
+channel_id=forcesub_data["channel_id"]
+channel_username=forcesub_data["channel_username"]
+
+try:
+        user_member=awaitapp.get_chat_member(channel_id,user_id)
+ifuser_member:
             return
-    except UserNotParticipant:
-        if channel_username:
-            channel_url = f"https://t.me/{channel_username}"
-        else:
-            invite_link = await app.export_chat_invite_link(channel_id)
-            channel_url = invite_link
-        await message.reply_photo(
-            photo="https://envs.sh/Tn_.jpg",
-            caption=(f"**👋 ʜᴇʟʟᴏ {message.from_user.mention},**\n\n**ʏᴏᴜ ɴᴇᴇᴅ ᴛᴏ ᴊᴏɪɴ ᴛʜᴇ [ᴄʜᴀɴɴᴇʟ]({channel_url}) ᴛᴏ sᴇɴᴅ ᴍᴇssᴀɢᴇs ɪɴ ᴛʜɪs ɢʀᴏᴜᴘ.**"),
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("๏ ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ ๏", url=channel_url)]]),
-        )
-        await asyncio.sleep(1)
-    except ChatAdminRequired:
-        forcesub_collection.delete_one({"chat_id": chat_id})
-        return await message.reply_text("**🚫 I'ᴍ ɴᴏ ʟᴏɴɢᴇʀ ᴀɴ ᴀᴅᴍɪɴ ɪɴ ᴛʜᴇ ғᴏʀᴄᴇᴅ sᴜʙsᴄʀɪᴘᴛɪᴏɴ ᴄʜᴀɴɴᴇʟ. ғᴏʀᴄᴇ sᴜʙsᴄʀɪᴘᴛɪᴏɴ ʜᴀs ʙᴇᴇɴ ᴅɪsᴀʙʟᴇᴅ.**")
+exceptUserNotParticipant:
+        ifchannel_username:
+            channel_url=f"https://t.me/{channel_username}"
+else:
+            invite_link=awaitapp.export_chat_invite_link(channel_id)
+channel_url=invite_link
+awaitmessage.reply_photo(
+photo="https://envs.sh/Tn_.jpg",
+caption=(f"**👋 ʜᴇʟʟᴏ {message.from_user.mention},**\n\n**ʏᴏᴜ ɴᴇᴇᴅ ᴛᴏ ᴊᴏɪɴ ᴛʜᴇ [ᴄʜᴀɴɴᴇʟ]({channel_url}) ᴛᴏ sᴇɴᴅ ᴍᴇssᴀɢᴇs ɪɴ ᴛʜɪs ɢʀᴏᴜᴘ.**"),
+reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("๏ ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ ๏",url=channel_url)]]),
+)
+awaitasyncio.sleep(1)
+exceptChatAdminRequired:
+        forcesub_collection.delete_one({"chat_id":chat_id})
+returnawaitmessage.reply_text("**🚫 I'ᴍ ɴᴏ ʟᴏɴɢᴇʀ ᴀɴ ᴀᴅᴍɪɴ ɪɴ ᴛʜᴇ ғᴏʀᴄᴇᴅ sᴜʙsᴄʀɪᴘᴛɪᴏɴ ᴄʜᴀɴɴᴇʟ. ғᴏʀᴄᴇ sᴜʙsᴄʀɪᴘᴛɪᴏɴ ʜᴀs ʙᴇᴇɴ ᴅɪsᴀʙʟᴇᴅ.**")
 
-@app.on_message(filters.group, group=30)
-async def enforce_forcesub(client: Client, message: Message):
-    if not await check_forcesub(client, message):
+@app.on_message(filters.group,group=30)
+asyncdefenforce_forcesub(client:Client,message:Message):
+    ifnotawaitcheck_forcesub(client,message):
         return
 
 
-__MODULE__ = "ғsᴜʙ"
-__HELP__ = """**
+__MODULE__="ғsᴜʙ"
+__HELP__="""**
 /fsub <ᴄʜᴀɴɴᴇʟ ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ɪᴅ> - sᴇᴛ ғᴏʀᴄᴇ sᴜʙsᴄʀɪᴘᴛɪᴏɴ ғᴏʀ ᴛʜɪs ɢʀᴏᴜᴘ.
 /fsub off - ᴅɪsᴀʙʟᴇ ғᴏʀᴄᴇ sᴜʙsᴄʀɪᴘᴛɪᴏɴ ғᴏʀ ᴛʜɪs ɢʀᴏᴜᴘ.**
 """
 
 
-# ©️ Copyright Reserved - @NoxxOP  Nand Yaduwanshi
-
-# ===========================================
-# ©️ 2025 Nand Yaduwanshi (aka @NoxxOP)
-# 🔗 GitHub : https://github.com/NoxxOP/ShrutiMusic
-# 📢 Telegram Channel : https://t.me/ShrutiBots
-# ===========================================
 
 
-# ❤️ Love From ShrutiBots 
+
+
+
+
+
+
+
+

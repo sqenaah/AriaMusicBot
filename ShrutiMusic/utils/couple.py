@@ -1,28 +1,28 @@
-coupledb = {}
+utf-8utf-8coupledb={}
 
 
-async def _get_lovers(cid: int):
-    chat_data = coupledb.get(cid, {})
-    lovers = chat_data.get("couple", {})
-    return lovers
+asyncdef_get_lovers(cid:int):
+    chat_data=coupledb.get(cid,{})
+lovers=chat_data.get("couple",{})
+returnlovers
 
 
-async def get_image(cid: int):
-    chat_data = coupledb.get(cid, {})
-    image = chat_data.get("img", "")
-    return image
+asyncdefget_image(cid:int):
+    chat_data=coupledb.get(cid,{})
+image=chat_data.get("img","")
+returnimage
 
 
-async def get_couple(cid: int, date: str):
-    lovers = await _get_lovers(cid)
-    return lovers.get(date, False)
+asyncdefget_couple(cid:int,date:str):
+    lovers=await_get_lovers(cid)
+returnlovers.get(date,False)
 
 
-async def save_couple(cid: int, date: str, couple: dict, img: str):
-    if cid not in coupledb:
-        coupledb[cid] = {"couple": {}, "img": ""}
-    coupledb[cid]["couple"][date] = couple
-    coupledb[cid]["img"] = img
+asyncdefsave_couple(cid:int,date:str,couple:dict,img:str):
+    ifcidnotincoupledb:
+        coupledb[cid]={"couple":{},"img":""}
+coupledb[cid]["couple"][date]=couple
+coupledb[cid]["img"]=img
 
 
-# ❤️ Love From ShrutiBots 
+
