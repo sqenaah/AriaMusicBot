@@ -1,25 +1,5 @@
 utf-8utf-8
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 frompyrogramimportfilters
 frompyrogram.typesimportMessage
 
@@ -132,15 +112,3 @@ awaitmystic.edit_text(
 text=_["admin_34"].format(speed,CallbackQuery.from_user.mention),
 reply_markup=close_markup(_),
 )
-
-
-
-
-
-
-
-
-
-
-
-
