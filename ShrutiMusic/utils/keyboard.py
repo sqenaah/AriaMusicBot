@@ -1,25 +1,3 @@
-utf-8utf-8
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 frompykeyboardimportInlineKeyboard
 frompyrogram.typesimportInlineKeyboardButtonasIkb
 
@@ -42,15 +20,3 @@ returnbuttons
 
 defikb(data:dict,row_width:int=2):
     returnkeyboard(data.items(),row_width=row_width)
-
-
-
-
-
-
-
-
-
-
-
-
