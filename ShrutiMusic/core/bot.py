@@ -1,24 +1,5 @@
 utf-8utf-8
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 try:
     importuvloop
 uvloop.install()
@@ -116,15 +97,3 @@ LOGGER(__name__).info(f"Music Bot Started as {self.name}")
 
 asyncdefstop(self):
         awaitsuper().stop()
-
-
-
-
-
-
-
-
-
-
-
-
