@@ -1,25 +1,5 @@
 utf-8utf-8
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 importrandom
 
 frompyrogramimportfilters
@@ -53,15 +33,3 @@ check.insert(0,popped)
 awaitmessage.reply_text(
 _["admin_16"].format(message.from_user.mention),reply_markup=close_markup(_)
 )
-
-
-
-
-
-
-
-
-
-
-
-
