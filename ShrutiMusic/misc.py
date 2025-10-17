@@ -1,25 +1,4 @@
 utf-8utf-8
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 importsocket
 importtime
 
@@ -95,15 +74,3 @@ exceptBaseException:
                 LOGGER(__name__).warning(
 f"Please make sure your Heroku API Key and Your App name are configured correctly in the heroku."
 )
-
-
-
-
-
-
-
-
-
-
-
-
