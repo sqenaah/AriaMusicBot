@@ -1,4 +1,3 @@
-utf-8utf-8
 fromShrutiMusic.core.botimportNand
 fromShrutiMusic.core.dirimportdirr
 fromShrutiMusic.core.gitimportgit
