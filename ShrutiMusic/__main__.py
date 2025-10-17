@@ -23,7 +23,6 @@ BotCommand("seek","⏩ Seek forward"),
 BotCommand("seekback","⏪ Seek backward")
 BotCommand("speed","⏩ Adjust audio playback speed (group)"),
 BotCommand("cspeed","⏩ Adjust audio speed (channel)"),
-BotCommand("tag","📢 Tag everyone"),
 ]
 
 asyncdefsetup_bot_commands():
