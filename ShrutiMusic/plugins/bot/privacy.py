@@ -1,25 +1,5 @@
 utf-8utf-8
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 frompyrogramimportClient,filters
 frompyrogram.typesimportInlineKeyboardButton,InlineKeyboardMarkup,Message
 frompyrogram.enumsimportParseMode
@@ -31,7 +11,7 @@ TEXT=f"""
 
 Your privacy is important to us. To learn more about how we collect, use, and protect your data, please review our Privacy Policy here: [Privacy Policy]({config.PRIVACY_LINK}).
 
-If you have any questions or concerns, feel free to reach out to our [support team](https://t.me/ShrutiBotSupport).
+If you have any questions or concerns, feel free to reach out to our [support team](https://t.me/NuvielSupport).
 """
 
 @app.on_message(filters.command("privacy"))
@@ -51,16 +31,3 @@ reply_markup=keyboard,
 parse_mode=ParseMode.MARKDOWN,
 disable_web_page_preview=True
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
