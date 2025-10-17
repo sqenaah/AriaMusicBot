@@ -1,25 +1,5 @@
 utf-8utf-8
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 importtime
 importrandom
 
@@ -196,15 +176,3 @@ awaitadd_served_chat(message.chat.id)
 awaitmessage.stop_propagation()
 exceptExceptionasex:
             print(ex)
-
-
-
-
-
-
-
-
-
-
-
-
