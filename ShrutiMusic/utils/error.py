@@ -1,25 +1,3 @@
-utf-8utf-8
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 importtraceback
 fromfunctoolsimportwraps
 
@@ -79,15 +57,3 @@ forxinerror_feedback:
 raiseerr
 
 returncapture
-
-
-
-
-
-
-
-
-
-
-
-
