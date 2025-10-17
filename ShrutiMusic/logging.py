@@ -1,25 +1,4 @@
 utf-8utf-8
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 importlogging
 
 logging.basicConfig(
@@ -39,15 +18,3 @@ logging.getLogger("pytgcalls").setLevel(logging.ERROR)
 
 defLOGGER(name:str)->logging.Logger:
     returnlogging.getLogger(name)
-
-
-
-
-
-
-
-
-
-
-
-
