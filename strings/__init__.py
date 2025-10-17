@@ -1,25 +1,3 @@
-utf-8utf-8
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 importos
 fromtypingimportList
 
@@ -54,15 +32,3 @@ try:
 except:
         print("There is some issue with the language file inside bot.")
 exit()
-
-
-
-
-
-
-
-
-
-
-
-
