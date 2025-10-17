@@ -1,25 +1,4 @@
 utf-8utf-8
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 importos
 
 from..loggingimportLOGGER
@@ -40,15 +19,3 @@ if"cache"notinos.listdir():
         os.mkdir("cache")
 
 LOGGER(__name__).info("Directories Updated.")
-
-
-
-
-
-
-
-
-
-
-
-
