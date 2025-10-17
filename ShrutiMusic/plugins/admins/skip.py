@@ -1,25 +1,5 @@
 utf-8utf-8
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 frompyrogramimportfilters
 frompyrogram.typesimportInlineKeyboardMarkup,Message
 
@@ -252,15 +232,3 @@ reply_markup=InlineKeyboardMarkup(button),
 )
 db[chat_id][0]["mystic"]=run
 db[chat_id][0]["markup"]="stream"
-
-
-
-
-
-
-
-
-
-
-
-
