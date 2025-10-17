@@ -1,25 +1,5 @@
 utf-8utf-8
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 frompyrogramimportfilters
 frompyrogram.typesimportMessage
 
@@ -43,15 +23,3 @@ awaitset_loop(chat_id,0)
 awaitmessage.reply_text(
 _["admin_5"].format(message.from_user.mention),reply_markup=close_markup(_)
 )
-
-
-
-
-
-
-
-
-
-
-
-
