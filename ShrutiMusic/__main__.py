@@ -1,4 +1,3 @@
-utf-8utf-8
 importasyncio
 importimportlib
 frompyrogramimportidle
@@ -18,11 +17,6 @@ BotCommand("start","🚀 Start bot"),
 BotCommand("help","❓ Help menu and Many More Management Commands"),
 BotCommand("play","🎵 Start streaming the requested track"),
 BotCommand("queue","📄 Show track queue"),
-BotCommand("cplay","📻 Channel audio play"),
-BotCommand("seek","⏩ Seek forward"),
-BotCommand("seekback","⏪ Seek backward")
-BotCommand("speed","⏩ Adjust audio playback speed (group)"),
-BotCommand("cspeed","⏩ Adjust audio speed (channel)"),
 ]
 
 asyncdefsetup_bot_commands():
