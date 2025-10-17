@@ -1,25 +1,5 @@
 utf-8utf-8
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 importasyncio
 
 frompyrogramimportfilters
@@ -74,23 +54,6 @@ awaitcallback_query.message.edit_caption(
 caption=_["help_1"].format(SUPPORT_GROUP),
 reply_markup=help_pannel_page1(_,START=True)
 )
-
-@app.on_callback_query(filters.regex("fork_repo"))
-asyncdeffork_repo_callback(client,query):
-    awaitquery.message.edit_text(
-text=(
-"✨ <b>ʙᴜɪʟᴅ Yᴏᴜʀ Oᴡɴ ᴍᴜsɪᴄ ʙᴏᴛ 🎧</b>\n\n"
-"🚀 ʀᴇᴀᴅʏ ᴛᴏ ʟᴀᴜɴᴄʜ ʏᴏᴜʀ ᴏᴡɴ ʙᴏᴛ?\n"
-"ғᴏʀᴋ ᴛʜᴇ ʀᴇᴘᴏ ᴀɴᴅ ᴅᴇᴘʟᴏʏ ɪɴ sᴇᴄᴏɴᴅs.\n\n"
-"🔧 <b>Cᴜsᴛᴏᴍɪᴢᴇ ɪᴛ. Dᴇᴘʟᴏʏ ɪᴛ. Vɪʙᴇ ᴡɪᴛʜ ɪᴛ 🔥</b>"
-),
-disable_web_page_preview=True,
-reply_markup=InlineKeyboardMarkup(
-[
-[
-InlineKeyboardButton("🚀 Fᴏʀᴋ Rᴇᴘᴏ",url="https://github.com/NoxxOP/ShrutiMusic/fork"),
-InlineKeyboardButton("⚡ Hᴇʀᴏᴋᴜ Dᴇᴘʟᴏʏ",url="https://dashboard.heroku.com/new?template=https://github.com/NoxxOP/ShrutiMusic")
-],
 [
 InlineKeyboardButton("🔙 Bᴀᴄᴋ",callback_data="settingsback_helper")
 ]
@@ -647,15 +610,3 @@ except:
 
 
 asyncio.create_task(markup_timer())
-
-
-
-
-
-
-
-
-
-
-
-
