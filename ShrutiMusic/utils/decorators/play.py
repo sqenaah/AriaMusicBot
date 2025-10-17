@@ -1,25 +1,3 @@
-utf-8utf-8
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 importasyncio
 
 frompyrogram.enumsimportChatMemberStatus
@@ -216,15 +194,3 @@ fplay,
 )
 
 returnwrapper
-
-
-
-
-
-
-
-
-
-
-
-
