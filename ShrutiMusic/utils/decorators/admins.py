@@ -1,25 +1,3 @@
-utf-8utf-8
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 frompyrogram.enumsimportChatType
 frompyrogram.typesimportInlineKeyboardButton,InlineKeyboardMarkup
 
@@ -223,15 +201,3 @@ except:
 returnawaitmystic(client,CallbackQuery,_)
 
 returnwrapper
-
-
-
-
-
-
-
-
-
-
-
-
