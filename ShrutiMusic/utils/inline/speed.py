@@ -1,25 +1,3 @@
-utf-8utf-8
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 frompyrogram.typesimportInlineKeyboardButton,InlineKeyboardMarkup
 
 
@@ -61,15 +39,3 @@ callback_data="close",
 ]
 )
 returnupl
-
-
-
-
-
-
-
-
-
-
-
-
