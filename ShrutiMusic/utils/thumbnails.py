@@ -155,8 +155,8 @@ canvas.paste(art,(circle_x,circle_y),art)
 
 
 tl_font=ImageFont.truetype(FONT_BOLD_PATH,34)
-draw.text((28+1,18+1),"ShrutiMusic",fill=TEXT_SHADOW,font=tl_font)
-draw.text((28,18),"ShrutiMusic",fill=TEXT_WHITE,font=tl_font)
+draw.text((28+1,18+1),"Nuviel Music Bot",fill=TEXT_SHADOW,font=tl_font)
+draw.text((28,18),"Nuviel Music Bot",fill=TEXT_WHITE,font=tl_font)
 
 
 info_x=circle_x+thumb_size+60
